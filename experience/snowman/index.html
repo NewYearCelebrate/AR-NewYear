@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>С новым годом!</title>
+    <title>NFT marker example with a WebWorker, WASM and with Three.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
     <link rel="stylesheet" href="../css/video-style.css">
 </head>
@@ -11,7 +11,7 @@
 <body class="loading">
     <div id="loading">
         <img src="../Data/logo.gif" />
-        <span class="loading-text">Идет загрузка,подождите</span>
+        <span class="loading-text">Loading, please wait</span>
     </div>
     <!--
   ==================
@@ -54,7 +54,7 @@
 
     <script src="../js/third_party/three.js/stats.min.js"></script>
     <script src="../js/third_party/three.js/three.min.js"></script>
-    <script src="threejs_worker_gltf.js"></script>
+    <script src="threejs_wasm_worker.js"></script>
 
     <script>
         /**
@@ -115,7 +115,7 @@
 
                     start(
                         container,
-                        markers['AR_Marke'],
+                        markers['pinball'],
                         video,
                         video.videoWidth,
                         video.videoHeight,
