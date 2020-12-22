@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion = 24
+    buildToolsVersion = "24.0.3"
+
+    defaultConfig {
+        applicationId = "org.artoolkit.ar.samples.CalibOptical"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode = 2     // Integer type incremented by 1 for every release, major or minor, to Google store
+        versionName = "1.1" // Real fully qualified major and minor release description
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+
+        ndk {
+            moduleName = "CalibOptical"
+        }
+    }
+
+    sourceSets.main {
+        jni.srcDirs = []
+        jniLibs.srcDir 'src/main/libs'
+    }
+}
+
+dependencies {
+    // compile 'com.android.support:support-v4:23.0.1' // Only required when the target device API level is greater than
+    // compile 'com.android.support:appcompat-v7:23.3.0' // the compile and target of the app being deployed to the device
+    compile files('libs/BT200Ctrl.jar')
+    compile project(':aRBaseLib')
+}
