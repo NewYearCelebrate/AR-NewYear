@@ -1,137 +1,77 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <title>NFT marker example with a WebWorker, WASM and with Three.js</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
-    <link rel="stylesheet" href="../css/video-style.css">
-</head>
-
-<body class="loading">
+  <head>
+    <meta charset="utf-8" />
+    <title>С новым годом!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/video-style.css" />
+  </head>
+  <body>
     <div id="loading">
-        <img src="../Data/logo.gif" />
-        <span class="loading-text">Loading, please wait</span>
+      <img src="../Data/logo.gif" />
+      <span class="loading-text">Идет загрузка,подождите</span>
     </div>
     <!--
-  ==================
-  STATS
-  ==================
-  -->
-
-    <div id="stats" class="ui stats">
-
-        <div id="stats1" class="stats-item">
-            <p class="stats-item-title">
-                Main
-            </p>
-        </div>
-
-        <div id="stats2" class="stats-item">
-            <p class="stats-item-title">
-                Worker
-            </p>
-        </div>
-
-    </div>
-
-    <!--
-  ==================
-  CAMERA VIDEO & CANVAS
-  ==================
-  -->
+      ==================
+      CAMERA VIDEO & CANVAS
+      ==================
+      -->
 
     <div id="app">
-        <video loop autoplay muted playsinline id="video">
-          </video>
+      <video loop autoplay muted playsinline id="video"></video>
 
-        <canvas id="canvas"></canvas>
+      <canvas id="canvas"></canvas>
     </div>
-
-    <a href="https://raw.githubusercontent.com/artoolkit/artoolkit5/master/doc/Marker%20images/pinball.jpg" class="ui marker" target="_blank">
-          🖼 Marker Image
-      </a>
-
-    <script src="../js/third_party/three.js/stats.min.js"></script>
-    <script src="../js/third_party/three.js/three.min.js"></script>
-    <script src="threejs_wasm_worker.js"></script>
+        <script src="../js/third_party/three.js/three.min.js"></script>
+    <script src="../js/third_party/three.js/GLTFLoader.js"></script>
+    <script src="threejs_worker_gltf.js"></script>
 
     <script>
-        /**
-         * STATS
-         */
-        var statsMain = new Stats();
-        statsMain.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-        document.getElementById('stats1').appendChild(statsMain.dom);
 
-        var statsWorker = new Stats();
-        statsWorker.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-        document.getElementById('stats2').appendChild(statsWorker.dom);
+      /**
+       * APP / ELEMENTS
+       */
+      var container = document.getElementById("app");
+      var video = document.getElementById("video");
+      var canvas = document.getElementById("canvas");
 
-        /**
-         * APP / ELEMENTS
-         */
-        var container = document.getElementById('app');
-        var video = document.getElementById('video');
-        var canvas = document.getElementById('canvas');
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        var hint = {
+          audio: false,
+          video: true
+        };
 
-        /**
-         * APP / VIDEO STREAM
-         */
-
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            var hint = {
-                audio: false,
-                video: true
-            };
-            if (window.innerWidth < 800) {
-                var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
-                var height = (window.innerWidth < window.innerHeight) ? 360 : 240;
-
-                var aspectRatio = window.innerWidth / window.innerHeight;
-
-                console.log(width, height);
-
-                hint = {
-                    audio: false,
-                    video: {
-                        facingMode: 'environment',
-                        width: {
-                            min: width,
-                            max: width
-                        }
-                    },
-                };
-
-                console.log(hint);
-            }
-
-            navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
-                video.srcObject = stream;
-                video.addEventListener('loadedmetadata', function() {
-                    video.play();
-
-                    console.log('video', video, video.videoWidth, video.videoHeight);
-
-                    start(
-                        container,
-                        markers['pinball'],
-                        video,
-                        video.videoWidth,
-                        video.videoHeight,
-                        canvas,
-                        function() {
-                            statsMain.update()
-                        },
-                        function() {
-                            statsWorker.update();
-                        },
-                        null
-                    );
-                });
-            });
+        if (window.innerWidth < 800) {
+          hint = {
+            audio: false,
+            video: {
+                width: { ideal: 480 },
+                height: { ideal: 640 },
+                facingMode:
+                    { exact:
+                        "environment"
+                    }
+                },
+          };
         }
-    </script>
-</body>
 
+        navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
+          video.srcObject = stream;
+          video.addEventListener("loadedmetadata", function() {
+            video.play();
+
+            start(
+              container,
+              markers["AR_Marker"],
+              video,
+              video.videoWidth,
+              video.videoHeight,
+              canvas,
+              null
+            );
+          });
+        });
+      }
+    </script>
+  </body>
 </html>
