@@ -78,11 +78,6 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
 
-    var sphere = new THREE.Mesh(
-        new THREE.SphereGeometry(0.5, 8, 8),
-        new THREE.MeshNormalMaterial()
-    );
-
     var root = new THREE.Object3D();
     scene.add(root);
 
@@ -94,6 +89,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             model.position.z = 0;
             model.position.x = 0;
             model.position.y = 0;
+			model.rotation.x = 0;
+			model.rotation.y = 0;
+			model.rotation.z = 0;
 			model.scale.x = 200;
 			model.scale.y - 200;
 			model.scale.z = 200;
@@ -186,7 +184,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
                         // removing loader page if present
                         var loader = document.getElementById('loading');
                         if (loader) {
-                            loader.querySelector('.loading-text').innerText = 'Поехали!';
+                            loader.querySelector('.loading-text').innerText = 'Начали!';
                             setTimeout(function(){
                                 loader.parentElement.removeChild(loader);
                             }, 2000);
