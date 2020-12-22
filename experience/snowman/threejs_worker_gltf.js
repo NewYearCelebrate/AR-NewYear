@@ -33,7 +33,7 @@ var markers = {
     }
 };
 
-var setMatrix = function (matrix, value) {
+var setMatrix = function(matrix, value) {
     var array = [];
     for (var key in value) {
         array[key] = value[key];
@@ -45,7 +45,7 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-function start( container, marker, video, input_width, input_height, canvas_draw, render_update, track_update) {
+function start(container, marker, video, input_width, input_height, canvas_draw, render_update, track_update) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -68,10 +68,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
     var scene = new THREE.Scene();
 
-    var camera = new THREE.Camera();
-    camera.matrixAutoUpdate = false;
-    // var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    // camera.position.z = 400;
+    //var camera = new THREE.Camera();
+    //camera.matrixAutoUpdate = false;
+    var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.z = 400;
 
     scene.add(camera);
 
@@ -89,22 +89,34 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("../Data/models/Flamingo.glb", function (gltf) {
-            model = gltf.scene.children[0];
-            model.position.z = 0;
-            model.position.x = 100;
-            model.position.y = 100;
+    threeGLTFLoader.load("../Data/models/Flamingo.glb", function(gltf) {
+        model = gltf.scene.children[0];
+        model.position.z = 0;
+        model.position.x = 100;
+        model.position.y = 100;
 
-            var animation = gltf.animations[0];
-            var mixer = new THREE.AnimationMixer(model);
-            mixers.push(mixer);
-            var action = mixer.clipAction(animation);
-            action.play();
+        var animation = gltf.animations[0];
+        var mixer = new THREE.AnimationMixer(model);
+        mixers.push(mixer);
+        var action = mixer.clipAction(animation);
+        action.play();
 
-            root.matrixAutoUpdate = false;
-            root.add(model);
-        }
-    );
+        root.matrixAutoUpdate = false;
+        root.add(model);
+    });
+
+    const listener = new THREE.AudioListener();
+    camera.add(listener);
+
+    const sound = new THREE.Audio(listener);
+
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load('../Data/sound/audio_snowman.ogg', function(buffer) {
+        sound.setBuffer(buffer);
+        sound.setLoop(true);
+        sound.setVolume(0.5);
+
+    });
 
     var load = function() {
         vw = input_width;
@@ -149,44 +161,48 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         worker.onmessage = function(ev) {
             var msg = ev.data;
             switch (msg.type) {
-                case "loaded": {
-                    var proj = JSON.parse(msg.proj);
-                    var ratioW = pw / w;
-                    var ratioH = ph / h;
-                    proj[0] *= ratioW;
-                    proj[4] *= ratioW;
-                    proj[8] *= ratioW;
-                    proj[12] *= ratioW;
-                    proj[1] *= ratioH;
-                    proj[5] *= ratioH;
-                    proj[9] *= ratioH;
-                    proj[13] *= ratioH;
-                    setMatrix(camera.projectionMatrix, proj);
-                    break;
-                }
-
-                case "endLoading": {
-                    if (msg.end == true) {
-                        // removing loader page if present
-                        var loader = document.getElementById('loading');
-                        if (loader) {
-                            loader.querySelector('.loading-text').innerText = 'Start the tracking!';
-                            setTimeout(function(){
-                                loader.parentElement.removeChild(loader);
-                            }, 2000);
-                        }
+                case "loaded":
+                    {
+                        var proj = JSON.parse(msg.proj);
+                        var ratioW = pw / w;
+                        var ratioH = ph / h;
+                        proj[0] *= ratioW;
+                        proj[4] *= ratioW;
+                        proj[8] *= ratioW;
+                        proj[12] *= ratioW;
+                        proj[1] *= ratioH;
+                        proj[5] *= ratioH;
+                        proj[9] *= ratioH;
+                        proj[13] *= ratioH;
+                        //setMatrix(camera.projectionMatrix, proj);
+                        break;
                     }
-                    break;
-                }
 
-                case "found": {
-                    found(msg);
-                    break;
-                }
-                case "not found": {
-                    found(null);
-                    break;
-                }
+                case "endLoading":
+                    {
+                        if (msg.end == true) {
+                            // removing loader page if present
+                            var loader = document.getElementById('loading');
+                            if (loader) {
+                                loader.querySelector('.loading-text').innerText = 'Start the tracking!';
+                                setTimeout(function() {
+                                    loader.parentElement.removeChild(loader);
+                                }, 2000);
+                            }
+                        }
+                        break;
+                    }
+
+                case "found":
+                    {
+                        found(msg);
+                        break;
+                    }
+                case "not found":
+                    {
+                        found(null);
+                        break;
+                    }
             }
             track_update();
             process();
@@ -228,8 +244,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         }
     };
 
+    var flagAudio = true;
+
     var draw = function() {
-        render_update();
+        //render_update();
         var now = Date.now();
         var dt = now - lasttime;
         time += dt;
@@ -239,6 +257,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             root.visible = false;
         } else {
             root.visible = true;
+            if (flagAudio) {
+                sound.play();
+                flagAudio = false;
+            }
 
             // interpolate matrix
             for (var i = 0; i < 16; i++) {
