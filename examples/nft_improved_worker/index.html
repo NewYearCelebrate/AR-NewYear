@@ -28,7 +28,7 @@
         <video loop autoplay muted playsinline id="video"></video>
         <canvas id="canvas" style="visibility: visible;"></canvas>
     </div>
-    <canvas id="photoCanvas"></canvas>
+	<canvas id="photoCanvas"></canvas>
 
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
@@ -59,7 +59,8 @@
         function TakeScreenshot() {
 			PCContext.drawImage(video, 0, 0);
             PCContext.drawImage(canvas, 0, 0);
-
+	
+				
             photoCanvas.toBlob(function(blob) {
                 counter += 1;
                 saveAs(blob, "Photo_with_snowman_" + counter.toString());
@@ -131,12 +132,15 @@
                     }
                 };
             }
+			
 
+			
             navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
                 video.srcObject = stream;
                 video.addEventListener("loadedmetadata", function() {
                     video.play();
-
+			photoCanvas.width=video.videoWidth;
+			photoCanvas.height=video.videoHeight;
                     start(
                         container,
                         markers["qr_code_prelegacy"],
