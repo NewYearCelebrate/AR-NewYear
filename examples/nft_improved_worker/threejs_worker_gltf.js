@@ -89,11 +89,18 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("../Data/models/Flamingo.glb", function(gltf) {
+    threeGLTFLoader.load("../Data/models/SnowMan.glb", function(gltf) {
         model = gltf.scene.children[0];
-        model.position.z = 0;
+
         model.position.x = 100;
         model.position.y = 100;
+        model.position.z = 0;
+
+        model.position.x *= 80;
+        model.position.y *= 80;
+        model.position.z *= 80;
+
+        model.position.x -= 90;
 
         var animation = gltf.animations[0];
         var mixer = new THREE.AnimationMixer(model);
