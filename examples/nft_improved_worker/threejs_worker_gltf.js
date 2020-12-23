@@ -57,7 +57,7 @@ var setMatrix = function(matrix, value) {
     }
 };
 
-function start(container, marker, video, input_width, input_height, canvas_draw, render_update, track_update) {
+function start(container, marker, video, input_width, input_height, canvas_draw, photoCanvas, render_update, track_update) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -155,6 +155,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         container.style.height = sh + "px";
         canvas_draw.style.clientWidth = sw + "px";
         canvas_draw.style.clientHeight = sh + "px";
+        photoCanvas.style.clientWidth = sw + "px";
+        photoCanvas.style.clientHeight = sh + "px";
         canvas_draw.width = sw;
         canvas_draw.height = sh;
         w = vw * pscale;
