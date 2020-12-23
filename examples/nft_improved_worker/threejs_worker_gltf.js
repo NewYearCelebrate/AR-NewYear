@@ -40,8 +40,14 @@ var markers = {
     qr_code_prelegacy: {
         width: 370,
         height: 370,
-        dpi: 300,
+        dpi: 1,
         url: "../examples/DataNFT/qr-code_prelegacy"
+    },
+    chrismass_three_toys: {
+        width: 1920,
+        height: 1200,
+        dpi: 300,
+        url: "../examples/DataNFT/chrismass_three_toys"
     },
 };
 
