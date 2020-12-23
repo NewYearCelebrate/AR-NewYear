@@ -37,7 +37,7 @@
         var photoCanvas;
         var video;
         var PCContext;
-        var counter;
+        var counter = 0;
 
         var globalsSetup = false;
         setTimeout(setGlobals, 1200);
@@ -79,7 +79,7 @@
             if (globalsSetup) {
                 canvas.style.visibility = "hidden";
                 setTimeout(TakeScreenshot, 500);
-                canvas.style.visibility = "visible";
+                //canvas.style.visibility = "visible";
             }
         }
     </script>
