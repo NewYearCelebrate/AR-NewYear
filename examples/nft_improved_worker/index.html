@@ -22,7 +22,6 @@
 
     <div id="app">
         <video loop autoplay muted playsinline id="video"></video>
-
         <canvas id="canvas" style="visibility: visible;"></canvas>
     </div>
     <canvas id="photoCanvas" width="640" height="400" style="width: 640px; height: 480px;"></canvas>
@@ -38,6 +37,7 @@
         var photoCanvas;
         var video;
         var PCContext;
+        var counter;
 
         var globalsSetup = false;
         setTimeout(setGlobals, 1200);
