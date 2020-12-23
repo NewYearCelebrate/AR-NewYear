@@ -34,47 +34,47 @@
     <script src="canvas-toBlob.js"></script>
 
     <script type="text/javascript">
-        function alertF() {
-            alert(1);
+        var canvas;
+        var photoCanvas;
+        var video;
+        var PCContext;
+
+        document.onload = function() {
+            canvas = document.getElementById("canvas");
+            video = document.getElementById('video');
+
+            photoCanvas = document.getElementById("photoCanvas");
+            PCContext = photoCanvas.getContext('2d');
         }
 
-        var counter = 0;
 
         function TakeScreenshot() {
-
-
             //let video = document.getElementById('video');
-            let canvas = document.getElementById("canvas");
-
-            let savedVisibility = canvas.style.visibility;
-            canvas.style.visibility = "hidden";
-            console.log(canvas);
-            console.log(canvas.style);
-            console.log(canvas.style.visibility);
-
-            let photoCanvas = document.getElementById("photoCanvas");
-
-            let PCContext = photoCanvas.getContext('2d');
-            //PCContext.drawImage(video, 0, 0, 600, 400, 0, 0, 600, 400);
+            //let savedVisibility = canvas.style.visibility;
+            PCContext.drawImage(video, 0, 0, 600, 400, 0, 0, 600, 400);
             PCContext.drawImage(canvas, 0, 0, 600, 400, 0, 0, 600, 400);
 
             photoCanvas.toBlob(function(blob) {
                 counter += 1;
                 saveAs(blob, "Photo_with_snowman_" + counter.toString());
             });
-
             //html2canvas(document.getElementById('app')).then(function(temp_canvas) {
             //    temp_canvas.toBlob(function(blob) {
             //        counter += 1;
             //        saveAs(blob, "Photo_with_snowman_" + counter.toString());
             //    });
             //});
+        }
 
-            //canvas.style.visibility = savedVisibility;
+
+        function TakeScreenshotWrapper() {
+            canvas.style.visibility = "hidden";
+            setTimeout(TakeScreenshot, 500);
+            canvas.style.visibility = "visible";
         }
     </script>
 
-    <button onclick="TakeScreenshot()" style="outline: none;">
+    <button onclick="TakeScreenshotWrapper()" style="outline: none;">
   <img src="t2.png" style="
   position: absolute;
   z-index: 99999999;
