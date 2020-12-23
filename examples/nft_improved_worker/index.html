@@ -53,8 +53,8 @@
 
 
         function TakeScreenshot() {
-            PCContext.drawImage(video, 0, 0, 600, 400, 0, 0, 600, 400);
-            PCContext.drawImage(canvas, 0, 0, 600, 400, 0, 0, 600, 400);
+            PCContext.drawImage(video, 0, 0);
+            PCContext.drawImage(canvas, 0, 0);
 
             photoCanvas.toBlob(function(blob) {
                 counter += 1;
@@ -62,7 +62,6 @@
             });
             canvas.style.visibility = "visible";
         }
-
 
         function TakeScreenshotWrapper() {
             if (globalsSetup) {
@@ -108,10 +107,10 @@
                     audio: false,
                     video: {
                         width: {
-                            ideal: 480
+                            ideal: window.innerWidth
                         },
                         height: {
-                            ideal: 640
+                            ideal: window.innerHeight
                         },
                         facingMode: {
                             exact: "environment"
