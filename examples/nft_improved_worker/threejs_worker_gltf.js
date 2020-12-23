@@ -26,10 +26,10 @@ var trackedMatrix = {
 
 var markers = {
     pinball: {
-        width: 1637,
-        height: 2048,
-        dpi: 215,
-        url: "../examples/DataNFT/pinball"
+        width: 938,
+        height: 938,
+        dpi: 300,
+        url: "../examples/DataNFT/qr-code_stable"
     }
 };
 
