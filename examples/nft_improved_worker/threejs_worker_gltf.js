@@ -157,8 +157,12 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         canvas_draw.style.clientHeight = sh + "px";
         photoCanvas.style.clientWidth = sw + "px";
         photoCanvas.style.clientHeight = sh + "px";
-        canvas_draw.width = sw;
-        canvas_draw.height = sh;
+		console.log(sw,sh)
+        photoCanvas.Width = sw;
+        photoCanvas.Height = sh; 
+		console.log(photoCanvas.Width,photoCanvas.Height);
+        canvas_draw.Width = sw;
+        canvas_draw.Height = sh;
         w = vw * pscale;
         h = vh * pscale;
         pw = Math.max(w, (h / 3) * 4);
