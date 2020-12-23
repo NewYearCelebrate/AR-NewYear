@@ -41,8 +41,13 @@
         var counter = 0;
 
         function TakeScreenshot() {
+
+
             //let video = document.getElementById('video');
             let canvas = document.getElementById("canvas");
+
+            let savedVisibility = canvas.style.visibility;
+            canvas.style.visibility = "hidden";
 
             let photoCanvas = document.getElementById("photoCanvas");
 
@@ -61,6 +66,8 @@
             //        saveAs(blob, "Photo_with_snowman_" + counter.toString());
             //    });
             //});
+
+            canvas.style.visibility = savedVisibility;
         }
     </script>
 
