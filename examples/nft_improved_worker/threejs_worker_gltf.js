@@ -147,8 +147,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         pscale = 320 / Math.max(vw, vh);
         sscale = isMobile() ? window.outerWidth / input_width : 1;
 
-        sw = vw * sscale;
-        sh = vh * sscale;
+        sw = vw;
+        sh = vh;
         video.style.width = sw + "px";
         video.style.height = sh + "px";
         container.style.width = sw + "px";
