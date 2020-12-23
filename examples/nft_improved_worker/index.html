@@ -25,6 +25,51 @@
 
         <canvas id="canvas"></canvas>
     </div>
+    <canvas id="photoCanvas"></canvas>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <script src="ua-parser.min.js"></script>
+    <script src="FileSaver.js"></script>
+    <script src="canvas-toBlob.js"></script>
+
+    <script type="text/javascript">
+        function alertF() {
+            alert(1);
+        }
+
+        var counter = 0;
+
+        function TakeScreenshot() {
+            //let video = document.getElementById('video');
+            //let canvas = document.getElementById("canvas");
+
+            //let photoCanvas = document.getElementById("photoCanvas");
+
+            //let PCContext = photoCanvas.getContext('2d');
+            //PCContext.drawImage(video, 0, 0, 600, 400, 0, 0, 600, 400);
+            //TSCcontext.drawImage(canvas, 0, 0, 600, 400, 0, 0, 600, 400);
+
+            html2canvas(document.getElementById('app')).then(function(temp_canvas) {
+                temp_canvas.toBlob(function(blob) {
+                    counter += 1;
+                    saveAs(blob, "Photo_with_snowman_" + counter.toString());
+                });
+            });
+        }
+    </script>
+
+    <button onclick="TakeScreenshot()" style="outline: none;">
+  <img src="t2.png" style="
+  position: absolute;
+  z-index: 99999999;
+  width: 5pc;
+  height: 4pc;
+  left: 50%;
+  top: 100%;
+  margin-left: -2.5pc;
+  margin-top: -7.5pc;">
+  </button>
 
     <script src="../js/third_party/three.js/stats.min.js"></script>
     <script src="../js/third_party/three.js/three.min.js"></script>
