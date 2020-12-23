@@ -92,13 +92,15 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     threeGLTFLoader.load("../Data/models/SnowMan.glb", function(gltf) {
         model = gltf.scene.children[0];
 
+        model.position.z = 0;
         model.position.x = 100;
         model.position.y = 100;
-        model.position.z = 0;
 
-        model.scale.x *= 100;
-        model.scale.y *= 100;
-        model.scale.z *= 100;
+
+        model.scale.z *= 15;
+        model.scale.x *= 15;
+        model.scale.y *= 15;
+
 
         var animation = gltf.animations[0];
         var mixer = new THREE.AnimationMixer(model);
