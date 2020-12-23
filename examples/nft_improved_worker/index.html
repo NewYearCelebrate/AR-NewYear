@@ -53,8 +53,6 @@
 
 
         function TakeScreenshot() {
-            //let video = document.getElementById('video');
-            //let savedVisibility = canvas.style.visibility;
             PCContext.drawImage(video, 0, 0, 600, 400, 0, 0, 600, 400);
             PCContext.drawImage(canvas, 0, 0, 600, 400, 0, 0, 600, 400);
 
@@ -62,12 +60,6 @@
                 counter += 1;
                 saveAs(blob, "Photo_with_snowman_" + counter.toString());
             });
-            //html2canvas(document.getElementById('app')).then(function(temp_canvas) {
-            //    temp_canvas.toBlob(function(blob) {
-            //        counter += 1;
-            //        saveAs(blob, "Photo_with_snowman_" + counter.toString());
-            //    });
-            //});
             canvas.style.visibility = "visible";
         }
 
