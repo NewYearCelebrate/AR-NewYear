@@ -95,30 +95,31 @@
          */
         var container = document.getElementById("app");
         var video = document.getElementById("video");
-        var canvas = document.getElementById("canvas");
+		var canvas = document.getElementById("canvas");
+		var photoCanvas = document.getElementById("photoCanvas");
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            var hint = {
-                audio: false,
-                video: true
-            };
+			var hint = {
+			audio: false,
+			video: {
+					width: { ideal: document.documentElement.windowWidth },
+					height: { ideal: document.documentElement.windowHeight }
+			}
+			};
 
-            if (window.innerWidth < 800) {
-                hint = {
-                    audio: false,
-                    video: {
-                        width: {
-                            ideal: 480
-                        },
-                        height: {
-                            ideal: 640
-                        },
-                        facingMode: {
-                            exact: "environment"
-                        }
-                    },
-                };
-            }
+			if (window.innerWidth < 800) {
+			hint = {
+				audio: false,
+				video: {
+					width: { ideal: document.documentElement.windowWidth },
+					height: { ideal: document.documentElement.windowHeight },
+					facingMode:
+						{ exact:
+							"environment"
+						}
+					}
+			};
+			}
 
             navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
                 video.srcObject = stream;
@@ -132,6 +133,7 @@
                         video.videoWidth,
                         video.videoHeight,
                         canvas,
+						photoCanvas,
                         null,
                         null,
                         null
