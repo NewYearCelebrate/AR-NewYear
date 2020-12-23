@@ -39,12 +39,16 @@
         var video;
         var PCContext;
 
-        document.onload = function() {
+        var globalsSetup = false;
+        setTimeout(setGlobals, 1200);
+
+        function setGlobals() {
             canvas = document.getElementById("canvas");
             video = document.getElementById('video');
 
             photoCanvas = document.getElementById("photoCanvas");
             PCContext = photoCanvas.getContext('2d');
+            globalsSetup = true;
         }
 
 
@@ -68,9 +72,11 @@
 
 
         function TakeScreenshotWrapper() {
-            canvas.style.visibility = "hidden";
-            setTimeout(TakeScreenshot, 500);
-            canvas.style.visibility = "visible";
+            if (globalsSetup) {
+                canvas.style.visibility = "hidden";
+                setTimeout(TakeScreenshot, 500);
+                canvas.style.visibility = "visible";
+            }
         }
     </script>
 
