@@ -135,7 +135,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     const audioLoader = new THREE.AudioLoader();
     audioLoader.load('../Data/sound/audio_snowman.ogg', function(buffer) {
         sound.setBuffer(buffer);
-        sound.setLoop(true);
+        sound.setLoop(false);
         sound.setVolume(0.5);
 
     });
