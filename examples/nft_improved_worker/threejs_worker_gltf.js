@@ -48,7 +48,7 @@ var markers = {
         height: 1077,
         dpi: 215,
         url: "../examples/DataNFT/pinball"
-    }
+    },
 };
 
 var setMatrix = function(matrix, value) {
