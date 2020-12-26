@@ -54,8 +54,15 @@
             PCContext = photoCanvas.getContext('2d');
             globalsSetup = true;
         }
-
-
+		
+		
+		/*
+		function TestVideo(){
+			PCContext.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+            PCContext.drawImage(canvas, 0, 0, canvas.naturalwidth, canvas.naturalheight);
+			 setTimeout(TestVideo, 50);
+		}	
+	*/
         function TakeScreenshot() {
             PCContext.drawImage(video, 0, 0);
             PCContext.drawImage(canvas, 0, 0);
@@ -72,6 +79,7 @@
             if (globalsSetup) {
                 canvas.style.visibility = "hidden";
                 setTimeout(TakeScreenshot, 500);
+                //setTimeout(TestVideo, 500);
                 setTimeout(() => {
                     canvas.style.visibility = "visible"
                 }, 3000);
@@ -143,6 +151,7 @@
                     video.play();
                     photoCanvas.width = video.videoWidth;
                     photoCanvas.height = video.videoHeight;
+					//photoCanvas.style.left = video.videoWidth;
                     start(
                         container,
                         markers["pinball"],

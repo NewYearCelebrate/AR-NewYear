@@ -123,7 +123,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         var mixer = new THREE.AnimationMixer(model);
         mixers.push(mixer);
         var action = mixer.clipAction(animation);
-        action.play();
+        
 
         root.matrixAutoUpdate = false;
         root.add(model);
@@ -283,6 +283,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
             root.visible = true;
             if (flagAudio) {
                 sound.play();
+				action.play();
                 flagAudio = false;
             }
 
