@@ -106,6 +106,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
+	var action;
 
     threeGLTFLoader.load("../Data/models/SnowMan.glb", function(gltf) {
         model = gltf.scene.children[0];
@@ -122,7 +123,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         var animation = gltf.animations[0];
         var mixer = new THREE.AnimationMixer(model);
         mixers.push(mixer);
-        var action = mixer.clipAction(animation);
+        action = mixer.clipAction(animation);
         
 
         root.matrixAutoUpdate = false;
