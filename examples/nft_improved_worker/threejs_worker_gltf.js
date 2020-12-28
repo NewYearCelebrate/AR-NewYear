@@ -116,9 +116,9 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     threeGLTFLoader.load("../Data/models/SnowMan.glb", function(gltf) {
         model = gltf.scene.children[0];
 
-        model.position.z = 2000;
+        model.position.z = 800;
         model.position.x = 900;
-        model.position.y = -9000;
+        model.position.y = -5500;
 
         model.scale.z = 10000;
         model.scale.x = 10000;
