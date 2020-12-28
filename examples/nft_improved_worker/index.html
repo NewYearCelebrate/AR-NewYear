@@ -54,9 +54,9 @@
             PCContext = photoCanvas.getContext('2d');
             globalsSetup = true;
         }
-		
-		
-		/*
+
+
+        /*
 		function TestVideo(){
 			PCContext.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
             PCContext.drawImage(canvas, 0, 0, canvas.naturalwidth, canvas.naturalheight);
@@ -71,6 +71,7 @@
             photoCanvas.toBlob(function(blob) {
                 counter += 1;
                 saveAs(blob, "Photo_with_snowman_" + counter.toString());
+                canvas.style.visibility = "visible";
             });
         }
 
@@ -79,10 +80,6 @@
             if (globalsSetup) {
                 canvas.style.visibility = "hidden";
                 setTimeout(TakeScreenshot, 500);
-                //setTimeout(TestVideo, 500);
-                setTimeout(() => {
-                    canvas.style.visibility = "visible"
-                }, 3000);
             }
         }
     </script>
@@ -151,10 +148,10 @@
                     video.play();
                     photoCanvas.width = video.videoWidth;
                     photoCanvas.height = video.videoHeight;
-					//photoCanvas.style.left = video.videoWidth;
+                    //photoCanvas.style.left = video.videoWidth;
                     start(
                         container,
-                        markers["pinball"],
+                        markers["newYear_marker"],
                         video,
                         video.videoWidth,
                         video.videoHeight,

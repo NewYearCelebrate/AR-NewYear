@@ -43,11 +43,17 @@ var markers = {
         dpi: 300,
         url: "../examples/DataNFT/qr-code_prelegacy"
     },
-	pinball: {
+    pinball: {
         width: 1077,
         height: 1077,
         dpi: 215,
         url: "../examples/DataNFT/pinball"
+    },
+    newYear_marker: {
+        width: 1637,
+        height: 2048,
+        dpi: 220,
+        url: "../examples/DataNFT/newYear_marker"
     },
 };
 
@@ -88,7 +94,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
     //var camera = new THREE.Camera();
     //camera.matrixAutoUpdate = false;
-    var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000);
+    var camera = new THREE.PerspectiveCamera(44, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 400;
 
     scene.add(camera);
@@ -96,38 +102,40 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
 
-    var sphere = new THREE.Mesh(
-        new THREE.SphereGeometry(0.5, 8, 8),
-        new THREE.MeshNormalMaterial()
-    );
-
     var root = new THREE.Object3D();
     scene.add(root);
 
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
-	var action;
+    var action;
+
+
+    var modelPose = new THREE.Vector3(0, 0, 0);
+    var threeGLTFLoader = new THREE.GLTFLoader();
 
     threeGLTFLoader.load("../Data/models/SnowMan.glb", function(gltf) {
         model = gltf.scene.children[0];
 
-        model.position.z = 0;
-        model.position.x = 200;
+        model.position.z = 900;
+        model.position.x = 900;
         model.position.y = -1100;
 
-        model.scale.z = 3000;
-        model.scale.x = 3000;
-        model.scale.y = 3000;
+        model.scale.z = 4000;
+        model.scale.x = 4000;
+        model.scale.y = 4000;
 
 
         var animation = gltf.animations[0];
         var mixer = new THREE.AnimationMixer(model);
         mixers.push(mixer);
         action = mixer.clipAction(animation);
-        
+
 
         root.matrixAutoUpdate = false;
         root.add(model);
+
+        let b = new THREE.Vector3(0, 0, 0);
+        modelPose.subVectors(model.position, b.setFromMatrixPosition(root.matrix));
     });
 
     const listener = new THREE.AudioListener();
@@ -271,6 +279,9 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
     var flagAudio = true;
 
+    var rootQuaternion = new THREE.Quaternion();
+    var modelPoseCopy = new THREE.Vector3();
+
     var draw = function() {
         //render_update();
         var now = Date.now();
@@ -284,7 +295,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
             root.visible = true;
             if (flagAudio) {
                 sound.play();
-				action.play();
+                action.play();
                 flagAudio = false;
             }
 
@@ -298,6 +309,13 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
             // set matrix of 'root' by detected 'world' matrix
             setMatrix(root.matrix, trackedMatrix.interpolated);
+
+            rootQuaternion.setFromRotationMatrix(root.matrix);
+
+            modelPoseCopy.copy(modelPose);
+            modelPoseCopy.applyQuaternion(rootQuaternion);
+
+            model.position.set(modelPoseCopy.x, modelPoseCopy.y, modelPoseCopy.z);
         }
 
         renderer.render(scene, camera);
