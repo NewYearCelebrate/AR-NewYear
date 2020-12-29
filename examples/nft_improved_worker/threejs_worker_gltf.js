@@ -261,9 +261,6 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                             }
                             toggleFlag = !toggleFlag;
                         }
-                        found(msg);
-                        break;
-
                         found(null);
                         break;
                     }
