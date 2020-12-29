@@ -191,6 +191,10 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
             marker: marker.url
         });
 
+        var toggleFlag = false;
+        var hideCall;
+        var unHideCall;
+
         worker.onmessage = function(ev) {
             var msg = ev.data;
             switch (msg.type) {
@@ -228,11 +232,38 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
                 case "found":
                     {
+                        if (toggleFlag) {
+                            if (hideCall != null) {
+                                clearTimeout(hideCall);
+                            }
+                            var hint = document.getElementById('not_tracked');
+                            if (hint) {
+                                unHideCall = setTimeout(function() {
+                                    hint.style.visibility = "visible";
+                                }, 600);
+                            }
+                            toggleFlag = !toggleFlag;
+                        }
                         found(msg);
                         break;
                     }
                 case "not found":
                     {
+                        if (!toggleFlag) {
+                            if (unHideCall != null) {
+                                clearTimeout(unHideCall);
+                            }
+                            var hint = document.getElementById('not_tracked');
+                            if (hint) {
+                                hideCall = setTimeout(function() {
+                                    hint.style.visibility = "hidden";
+                                }, 600);
+                            }
+                            toggleFlag = !toggleFlag;
+                        }
+                        found(msg);
+                        break;
+
                         found(null);
                         break;
                     }
