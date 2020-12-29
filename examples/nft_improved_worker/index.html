@@ -110,7 +110,7 @@
     <script>
         var non_android = true;
         var parser = new UAParser();
-
+        alert(parser.getOS().name.toLowerCase());
         if (parser.getOS().name.toLowerCase() != "android") {
             non_android = true;
         } else {
