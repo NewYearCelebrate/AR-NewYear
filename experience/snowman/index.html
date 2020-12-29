@@ -3,13 +3,14 @@
 
 <head>
     <title>С новым годом, томичи!</title>
+    <script type="text/javascript" src="ua-parser.min.js"></script>
 
 </head>
 
 <body>
-    <script src="ua-parser.min.js"></script>
+
     <script type="text/javascript">
-        var parser = new UAparser();
+        var parser = new UAParser();
         if (parser.getOS().name.toLowerCase() == "android") {
             window.location.replace("https://newyearcelebrate.github.io/AR-NewYear/examples/nft_improved_worker");
         } else {
