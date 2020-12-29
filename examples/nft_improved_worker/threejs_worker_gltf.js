@@ -194,6 +194,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         var toggleFlag = false;
         var hideCall;
         var unHideCall;
+        var stopSound;
 
         worker.onmessage = function(ev) {
             var msg = ev.data;
@@ -236,10 +237,14 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                             if (unHideCall != null) {
                                 clearTimeout(unHideCall);
                             }
+                            if (stopSound != null) {
+                                clearTimeout(stopSound);
+                            }
                             var hint = document.getElementById('not_tracked');
                             if (hint) {
                                 hideCall = setTimeout(function() {
                                     hint.style.visibility = "hidden";
+                                    sound.setVolume(0.5);
                                 }, 600);
                             }
                             toggleFlag = !toggleFlag;
@@ -258,6 +263,9 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                                 unHideCall = setTimeout(function() {
                                     hint.style.visibility = "visible";
                                 }, 600);
+                                stopSound = setTimeout(function() {
+                                    sound.setVolume(0.0);
+                                }, 1200);
                             }
                             toggleFlag = !toggleFlag;
                         }
