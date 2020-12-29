@@ -151,6 +151,18 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
     });
 
+    window.addEventListener("pagehide", event => {
+        if (event.persisted) {
+            sound.setVolume(0);
+        }
+    }, false);
+
+    window.addEventListener("pageshow", event => {
+        if (event.persisted) {
+            sound.setVolume(0.5);
+        }
+    }, false);
+
     var load = function() {
         vw = input_width;
         vh = input_height;
