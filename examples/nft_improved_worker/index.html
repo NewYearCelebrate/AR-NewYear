@@ -118,34 +118,12 @@
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             var hint = {
                 audio: false,
-                video: {
-                    width: {
-                        ideal: document.documentElement.windowWidth
-                    },
-                    height: {
-                        ideal: document.documentElement.windowHeight
-                    }
+                video: true,
+				facingMode: {
+                            exact: "environment"
+							}
                 }
             };
-
-            if (window.innerWidth < 800) {
-                hint = {
-                    audio: false,
-                    video: {
-                        width: {
-                            ideal: document.documentElement.windowWidth
-                        },
-                        height: {
-                            ideal: document.documentElement.windowHeight
-                        },
-                        facingMode: {
-                            exact: "environment"
-                        }
-                    }
-                };
-            }
-
-
 
             navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
                 video.srcObject = stream;
