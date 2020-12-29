@@ -180,8 +180,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         canvas_draw.style.clientHeight = sh + "px";
         canvas_draw.Width = sw;
         canvas_draw.Height = sh;
-        w = vw * pscale;
-        h = vh * pscale;
+        w = vw;
+        h = vh;
         pw = Math.max(w, (h / 3) * 4);
         ph = Math.max(h, (w / 4) * 3);
         ox = (pw - w) / 2;
