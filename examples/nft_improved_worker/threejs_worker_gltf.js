@@ -346,7 +346,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                 action.play();
                 setTimeout(function() {
                     sound.play();
-                }, 1100)
+                }, 2100)
             }
 
             // interpolate matrix
