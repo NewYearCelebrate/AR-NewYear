@@ -5,7 +5,7 @@ var mixers = [];
 function isMobile() {
     return /Android|mobile|iPad|iPhone/i.test(navigator.userAgent);
 }
-
+ // fix iOS
 var interpolationFactor = 20;
 
 var trackedMatrix = {
