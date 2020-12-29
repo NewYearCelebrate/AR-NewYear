@@ -118,11 +118,11 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
         model.position.z = 0;
         model.position.x = 200;
-        model.position.y = -3500;
+        model.position.y = -3000;
 
-        model.scale.z = 7500;
-        model.scale.x = 7500;
-        model.scale.y = 7500;
+        model.scale.z = 6000;
+        model.scale.x = 6000;
+        model.scale.y = 6000;
 
 
         var animation = gltf.animations[0];
@@ -144,14 +144,14 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     const sound = new THREE.Audio(listener);
 
     const audioLoader = new THREE.AudioLoader();
-    setTimeout(function() {
-        audioLoader.load('../Data/sound/audio_snowman.ogg', function(buffer) {
-            sound.setBuffer(buffer);
-            sound.setLoop(false);
-            sound.setVolume(0.5);
+    audioLoader.load('../Data/sound/audio_snowman.ogg', function(buffer) {
+        sound.setBuffer(buffer);
+        sound.setLoop(false);
+        sound.setVolume(0.5);
 
-        });
-    }, 1000);
+    });
+
+
 
 
     var standalone = window.navigator.standalone,
@@ -343,9 +343,11 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         } else {
             root.visible = true;
             if (flagAudio) {
-                sound.play();
-                action.play();
                 flagAudio = false;
+                setTimeout(function() {
+                    sound.play();
+                    action.play();
+                }, 1000)
             }
 
             // interpolate matrix
