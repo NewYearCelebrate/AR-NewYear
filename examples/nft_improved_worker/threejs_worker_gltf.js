@@ -173,14 +173,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         container.style.height = sh + "px";
         canvas_draw.style.clientWidth = sw + "px";
         canvas_draw.style.clientHeight = sh + "px";
-        alert(parser.getOS().name.toLowerCase());
-        if (parser.getOS().name.toLowerCase() != "android") {
-            canvas_draw.Width = sw / 2;
-            canvas_draw.Height = sh / 2;
-        } else {
-            canvas_draw.Width = sw;
-            canvas_draw.Height = sh;
-        }
+        canvas_draw.Width = sw;
+        canvas_draw.Height = sh;
         w = vw;
         h = vh;
         pw = Math.max(w, (h / 3) * 4);
@@ -189,13 +183,10 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         oy = (ph - h) / 2;
         canvas_process.style.clientWidth = pw + "px";
         canvas_process.style.clientHeight = ph + "px";
-        if (parser.getOS().name.toLowerCase() != "android") {
-            canvas_process.width = pw / 2;
-            canvas_process.height = ph / 2;
-        } else {
-            canvas_process.width = pw;
-            canvas_process.height = ph;
-        }
+
+        canvas_process.width = pw;
+        canvas_process.height = ph;
+
         renderer.setSize(sw, sh);
 
         worker = new Worker("../../js/artoolkit.worker.js");
