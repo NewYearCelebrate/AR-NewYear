@@ -208,6 +208,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         });
 
         var toggleFlag = false;
+        var blocker = false;
         var hideCall;
         var unHideCall;
         var stopSound;
@@ -217,6 +218,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
             switch (msg.type) {
                 case "loaded":
                     {
+                        blocker = true;
                         var proj = JSON.parse(msg.proj);
                         var ratioW = pw / w;
                         var ratioH = ph / h;
@@ -249,7 +251,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
                 case "found":
                     {
-                        if (toggleFlag) {
+                        if (toggleFlag && blocker) {
                             if (unHideCall != null) {
                                 clearTimeout(unHideCall);
                             }
@@ -270,7 +272,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                     }
                 case "not found":
                     {
-                        if (!toggleFlag) {
+                        if (!toggleFlag && blocker) {
                             if (hideCall != null) {
                                 clearTimeout(hideCall);
                             }
