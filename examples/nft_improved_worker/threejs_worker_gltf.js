@@ -94,7 +94,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
     //var camera = new THREE.Camera();
     //camera.matrixAutoUpdate = false;
-    var camera = new THREE.PerspectiveCamera(44, window.innerWidth / window.innerHeight, 1, 10000);
+    var camera = new THREE.PerspectiveCamera(44, window.innerWidth / window.innerHeight, 1, 1000000);
     camera.position.z = 400;
 
     scene.add(camera);
@@ -116,8 +116,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     threeGLTFLoader.load("../Data/models/SnowMan.glb", function(gltf) {
         model = gltf.scene.children[0];
 
-        model.position.z = 800;
-        model.position.x = 900;
+        model.position.z = 250;
+        model.position.x = 200;
         model.position.y = -5500;
 
         model.scale.z = 10000;
