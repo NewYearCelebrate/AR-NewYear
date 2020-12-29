@@ -3,10 +3,19 @@
 
 <head>
     <title>С новым годом, томичи!</title>
+
 </head>
 
 <body>
-    <iframe src="https://mywebar.com/pi/8623" width="dev" height="600" allow="camera; accelerometer; vr" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"> Your browser does not support embedded content </iframe>
+    <script src="ua-parser.min.js"></script>
+    <script type="text/javascript">
+        var parser = new UAparser();
+        if (parser.getOS().name.toLowerCase() == "android") {
+            window.location.replace("https://newyearcelebrate.github.io/AR-NewYear/examples/nft_improved_worker");
+        } else {
+            window.location.replace("https://mywebar.com/pi/8623");
+        }
+    </script>
 </body>
 
 </html>
