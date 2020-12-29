@@ -151,10 +151,12 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
     });
 
-	var standalone = window.navigator.standalone,
-		userAgent = window.navigator.userAgent.toLowerCase(),
-		safari = /safari/.test( navigator.userAgent ),
-		ios = /iphone|ipod|ipad/.test( navigator.userAgent );
+    var standalone = window.navigator.standalone,
+        userAgent = window.navigator.userAgent.toLowerCase(),
+        safari = /safari/.test(navigator.userAgent),
+        ios = /iphone|ipod|ipad/.test(navigator.userAgent);
+
+    var parser = new UAParser();
 
     var load = function() {
         vw = input_width;
@@ -171,13 +173,13 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         container.style.height = sh + "px";
         canvas_draw.style.clientWidth = sw + "px";
         canvas_draw.style.clientHeight = sh + "px";
-		if(ios){
-			canvas_draw.Width = sw / 2;
-			canvas_draw.Height = sh / 2;
-		} else {	
-			canvas_draw.Width = sw;
-			canvas_draw.Height = sh;
-		}
+        if (parser.getOS().toLowerCase() == "ios") {
+            canvas_draw.Width = sw / 2;
+            canvas_draw.Height = sh / 2;
+        } else {
+            canvas_draw.Width = sw;
+            canvas_draw.Height = sh;
+        }
         w = vw;
         h = vh;
         pw = Math.max(w, (h / 3) * 4);
@@ -186,13 +188,13 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         oy = (ph - h) / 2;
         canvas_process.style.clientWidth = pw + "px";
         canvas_process.style.clientHeight = ph + "px";
-		if(ios){
-        canvas_process.width = pw / 2;
-        canvas_process.height = ph / 2;
-		} else {	
-        canvas_process.width = pw;
-        canvas_process.height = ph;		
-		}
+        if (ios) {
+            canvas_process.width = pw / 2;
+            canvas_process.height = ph / 2;
+        } else {
+            canvas_process.width = pw;
+            canvas_process.height = ph;
+        }
         renderer.setSize(sw, sh);
 
         worker = new Worker("../../js/artoolkit.worker.js");
