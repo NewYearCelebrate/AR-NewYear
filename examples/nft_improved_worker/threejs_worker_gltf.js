@@ -148,7 +148,6 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         sound.setBuffer(buffer);
         sound.setLoop(false);
         sound.setVolume(0.5);
-
     });
 
 
@@ -347,7 +346,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                 setTimeout(function() {
                     sound.play();
                     action.play();
-                }, 1000)
+                }, 3500)
             }
 
             // interpolate matrix
