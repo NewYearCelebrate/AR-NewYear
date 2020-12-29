@@ -48,6 +48,15 @@
         var PCContext;
         var counter = 0;
 
+        var non_android = true;
+        var parser = new UAParser();
+
+        if (parser.getOS().name.toLowerCase() != "android") {
+            non_android = true;
+        } else {
+            non_android = false;
+        }
+
         var globalsSetup = false;
         setTimeout(setGlobals, 1200);
 
