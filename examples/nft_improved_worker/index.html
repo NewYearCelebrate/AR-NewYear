@@ -48,14 +48,6 @@
         var PCContext;
         var counter = 0;
 
-        var non_android = true;
-        var parser = new UAParser();
-
-        if (parser.getOS().name.toLowerCase() != "android") {
-            non_android = true;
-        } else {
-            non_android = false;
-        }
 
         var globalsSetup = false;
         setTimeout(setGlobals, 1200);
@@ -116,6 +108,14 @@
     <script src="threejs_worker_gltf.js"></script>
 
     <script>
+        var non_android = true;
+        var parser = new UAParser();
+
+        if (parser.getOS().name.toLowerCase() != "android") {
+            non_android = true;
+        } else {
+            non_android = false;
+        }
         /**
          * APP / ELEMENTS
          */
@@ -125,20 +125,30 @@
         var photoCanvas = document.getElementById("photoCanvas");
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            var hint = {
-                audio: false,
-                video: {
-                    width: {
-                        ideal: document.documentElement.windowWidth
-                    },
-                    height: {
-                        ideal: document.documentElement.windowHeight
-                    }
-                }
-            };
+            if (non_android) {
+                var hint = {
+                    audio: false,
+                    video: true
+                };
 
-            if (window.innerWidth < 800) {
-                hint = {
+                if (window.innerWidth < 800) {
+                    hint = {
+                        audio: false,
+                        video: {
+                            width: {
+                                ideal: 480
+                            },
+                            height: {
+                                ideal: 640
+                            },
+                            facingMode: {
+                                exact: "environment"
+                            }
+                        },
+                    };
+                }
+            } else {
+                var hint = {
                     audio: false,
                     video: {
                         width: {
@@ -146,15 +156,27 @@
                         },
                         height: {
                             ideal: document.documentElement.windowHeight
-                        },
-                        facingMode: {
-                            exact: "environment"
                         }
                     }
                 };
+
+                if (window.innerWidth < 800) {
+                    hint = {
+                        audio: false,
+                        video: {
+                            width: {
+                                ideal: document.documentElement.windowWidth
+                            },
+                            height: {
+                                ideal: document.documentElement.windowHeight
+                            },
+                            facingMode: {
+                                exact: "environment"
+                            }
+                        }
+                    };
+                }
             }
-
-
 
             navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
                 video.srcObject = stream;
@@ -170,9 +192,8 @@
                         video.videoWidth,
                         video.videoHeight,
                         canvas,
+                        non_android,
                         null,
-                        null,
-                        null
                     );
                 });
             });
