@@ -189,7 +189,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         oy = (ph - h) / 2;
         canvas_process.style.clientWidth = pw + "px";
         canvas_process.style.clientHeight = ph + "px";
-        if (ios) {
+        if (parser.getOS().name.toLowerCase() != "android") {
             canvas_process.width = pw / 2;
             canvas_process.height = ph / 2;
         } else {
