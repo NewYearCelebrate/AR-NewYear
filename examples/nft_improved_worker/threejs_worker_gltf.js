@@ -118,11 +118,11 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
         model.position.z = 0;
         model.position.x = 200;
-        model.position.y = -5500;
+        model.position.y = -3500;
 
-        model.scale.z = 9400;
-        model.scale.x = 9400;
-        model.scale.y = 9400;
+        model.scale.z = 7500;
+        model.scale.x = 7500;
+        model.scale.y = 7500;
 
 
         var animation = gltf.animations[0];
