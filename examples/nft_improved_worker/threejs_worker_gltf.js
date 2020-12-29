@@ -212,7 +212,6 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
             switch (msg.type) {
                 case "loaded":
                     {
-                        blocker = true;
                         var proj = JSON.parse(msg.proj);
                         var ratioW = pw / w;
                         var ratioH = ph / h;
@@ -237,6 +236,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                                 loader.querySelector('.loading-text').innerText = 'Начинаем!';
                                 setTimeout(function() {
                                     loader.parentElement.removeChild(loader);
+                                    blocker = true;
                                 }, 2000);
                             }
                         }
