@@ -165,15 +165,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         pscale = 320 / Math.max(vw, (vh / 3) * 4);
         sscale = isMobile() ? window.outerWidth / input_width : 1;
 
-		if(non_android)
-		{
-			sw = vw * sscale;
-			sh = vh * sscale;
-		} else {
-			sw = vw;
-			sh = wh;
-		}
-		
+        sw = vw * sscale;
+        sh = vh * sscale;
         video.style.width = sw + "px";
         video.style.height = sh + "px";
         container.style.width = sw + "px";
@@ -182,16 +175,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         canvas_draw.style.clientHeight = sh + "px";
         canvas_draw.width = sw;
         canvas_draw.height = sh;
-		
-		if(non_android)
-		{
-			w = vw * pscale;
-			h = vh * pscale;
-		} else {
-			w = vw;
-			h = vh;
-		}
-		
+        w = vw * pscale;
+        h = vh * pscale;
         pw = Math.max(w, (h / 3) * 4);
         ph = Math.max(h, (w / 4) * 3);
         ox = (pw - w) / 2;
