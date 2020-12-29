@@ -69,7 +69,7 @@ var setMatrix = function(matrix, value) {
     }
 };
 
-function start(container, marker, video, input_width, input_height, canvas_draw, render_update) {
+function start(container, marker, video, input_width, input_height, canvas_draw, non_android, render_update) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -162,28 +162,27 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         vw = input_width;
         vh = input_height;
 
-        pscale = 320 / Math.max(vw, vh);
+        pscale = 320 / Math.max(vw, (vh / 3) * 4);
         sscale = isMobile() ? window.outerWidth / input_width : 1;
 
-        sw = vw;
-        sh = vh;
+        sw = vw * sscale;
+        sh = vh * sscale;
         video.style.width = sw + "px";
         video.style.height = sh + "px";
         container.style.width = sw + "px";
         container.style.height = sh + "px";
         canvas_draw.style.clientWidth = sw + "px";
         canvas_draw.style.clientHeight = sh + "px";
-        canvas_draw.Width = sw;
-        canvas_draw.Height = sh;
-        w = vw;
-        h = vh;
+        canvas_draw.width = sw;
+        canvas_draw.height = sh;
+        w = vw * pscale;
+        h = vh * pscale;
         pw = Math.max(w, (h / 3) * 4);
         ph = Math.max(h, (w / 4) * 3);
         ox = (pw - w) / 2;
         oy = (ph - h) / 2;
         canvas_process.style.clientWidth = pw + "px";
         canvas_process.style.clientHeight = ph + "px";
-
         canvas_process.width = pw;
         canvas_process.height = ph;
 
