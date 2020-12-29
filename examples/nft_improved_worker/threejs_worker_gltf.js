@@ -343,10 +343,11 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
             root.visible = true;
             if (flagAudio) {
                 flagAudio = false;
+                action.play();
                 setTimeout(function() {
                     sound.play();
-                    action.play();
-                }, 3500)
+
+                }, 1100)
             }
 
             // interpolate matrix
