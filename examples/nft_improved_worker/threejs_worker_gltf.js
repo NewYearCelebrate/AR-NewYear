@@ -233,13 +233,13 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                 case "found":
                     {
                         if (toggleFlag) {
-                            if (hideCall != null) {
-                                clearTimeout(hideCall);
+                            if (unHideCall != null) {
+                                clearTimeout(unHideCall);
                             }
                             var hint = document.getElementById('not_tracked');
                             if (hint) {
-                                unHideCall = setTimeout(function() {
-                                    hint.style.visibility = "visible";
+                                hideCall = setTimeout(function() {
+                                    hint.style.visibility = "hidden";
                                 }, 600);
                             }
                             toggleFlag = !toggleFlag;
@@ -250,13 +250,13 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                 case "not found":
                     {
                         if (!toggleFlag) {
-                            if (unHideCall != null) {
-                                clearTimeout(unHideCall);
+                            if (hideCall != null) {
+                                clearTimeout(hideCall);
                             }
                             var hint = document.getElementById('not_tracked');
                             if (hint) {
-                                hideCall = setTimeout(function() {
-                                    hint.style.visibility = "hidden";
+                                unHideCall = setTimeout(function() {
+                                    hint.style.visibility = "visible";
                                 }, 600);
                             }
                             toggleFlag = !toggleFlag;
