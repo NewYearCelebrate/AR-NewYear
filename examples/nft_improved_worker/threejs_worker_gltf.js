@@ -174,7 +174,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
         canvas_draw.style.clientWidth = sw + "px";
         canvas_draw.style.clientHeight = sh + "px";
         alert(parser.getOS().name.toLowerCase());
-        if (parser.getOS().name.toLowerCase() == "ios") {
+        if (parser.getOS().name.toLowerCase() == "mac os") {
             canvas_draw.Width = sw / 2;
             canvas_draw.Height = sh / 2;
         } else {
