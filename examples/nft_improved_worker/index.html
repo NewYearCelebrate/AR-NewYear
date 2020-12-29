@@ -118,31 +118,55 @@
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             var hint = {
                 audio: false,
-                video: true,
-                facingMode: {
-                    exact: "environment"
+                video: {
+                    width: {
+                        ideal: document.documentElement.windowWidth
+                    },
+                    height: {
+                        ideal: document.documentElement.windowHeight
+                    }
                 }
-            }
-        };
+            };
 
-        navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
-            video.srcObject = stream;
-            video.addEventListener("loadedmetadata", function() {
-                video.play();
-                photoCanvas.width = video.videoWidth;
-                photoCanvas.height = video.videoHeight;
-                //photoCanvas.style.left = video.videoWidth;
-                start(
-                    container,
-                    markers["newYear_marker"],
-                    video,
-                    video.videoWidth,
-                    video.videoHeight,
-                    canvas,
-                    null,
-                    null,
-                    null
-                );
+            if (window.innerWidth < 800) {
+                hint = {
+                    audio: false,
+                    video: {
+                        width: {
+                            ideal: document.documentElement.windowWidth
+                        },
+                        height: {
+                            ideal: document.documentElement.windowHeight
+                        },
+                        facingMode: {
+                            exact: "environment"
+                        }
+                    }
+                };
+            }
+
+
+
+            navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
+                video.srcObject = stream;
+                video.addEventListener("loadedmetadata", function() {
+                    video.play();
+                    photoCanvas.width = video.videoWidth;
+                    photoCanvas.height = video.videoHeight;
+                    //photoCanvas.style.left = video.videoWidth;
+                    start(
+                        container,
+                        markers["newYear_marker"],
+                        video,
+                        video.videoWidth,
+                        video.videoHeight,
+                        canvas,
+                        null,
+                        null,
+                        null
+                    );
+                }); >>>
+                >>> > parent of 2e1 f62f...Update index.html
             });
         });
     </script>
