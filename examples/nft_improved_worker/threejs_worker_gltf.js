@@ -153,8 +153,8 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
 	var standalone = window.navigator.standalone,
 		userAgent = window.navigator.userAgent.toLowerCase(),
-		safari = /safari/.test( userAgent ),
-		ios = /iphone|ipod|ipad/.test( userAgent );
+		safari = /safari/.test( navigator.userAgent ),
+		ios = /iphone|ipod|ipad/.test( navigator.userAgent );
 
     var load = function() {
         vw = input_width;
