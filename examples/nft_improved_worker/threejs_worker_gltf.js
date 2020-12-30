@@ -365,7 +365,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
             modelPoseCopy.copy(modelPose);
             modelPoseCopy.applyQuaternion(rootQuaternion);
 
-            model.position.set(modelPoseCopy.x, modelPoseCopy.y, modelPoseCopy.z);
+            //model.position.set(modelPoseCopy.x, modelPoseCopy.y, modelPoseCopy.z);
         }
 
         renderer.render(scene, camera);
